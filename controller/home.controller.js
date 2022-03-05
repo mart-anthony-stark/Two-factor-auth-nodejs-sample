@@ -1,3 +1,5 @@
+const e = require("express");
+
 const msg = require("messagebird")(process.env.API_KEY);
 
 module.exports = {
@@ -35,6 +37,15 @@ module.exports = {
    * Handle verification of code
    */
   postVerify: (req, res) => {
-    
+    const id = req.body.id;
+    const token = req.body.token;
+
+    msg.verify.verify(id, token, (err, response) => {
+      if (err) {
+        res.render("step2", { error: err.errors[0].description, id });
+      } else {
+        res.render("step3");
+      }
+    });
   },
 };
