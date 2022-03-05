@@ -7,10 +7,10 @@ module.exports = {
   /**
    * Handle phone submission
    */
-  postVerify: (req, res) => {
+  postSubmitNumber: (req, res) => {
     const num = req.body.number;
 
-    // Make request to verify
+    // Make request to send verification code
     msg.verify.create(
       num,
       {
@@ -30,5 +30,11 @@ module.exports = {
         }
       }
     );
+  },
+  /**
+   * Handle verification of code
+   */
+  postVerify: (req, res) => {
+    
   },
 };
